@@ -14,6 +14,7 @@ public class count {
 
     }
 
+
             public static int countVowels(String text) {
                 int count = 0;
                 text = text.toLowerCase();
