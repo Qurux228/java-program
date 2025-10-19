@@ -1,0 +1,90 @@
+import java.util.Arrays;
+import java.util.EmptyStackException;
+
+public class Run {
+
+        public static void main(String[] args) {
+            // Stack  Double
+            ArrayStack<Double> numbers = new ArrayStack<Double>(4);
+
+            numbers.push(12.5);
+            numbers.push(8.9);g
+            numbers.push(4.2);
+            numbers.push(13.8);
+            numbers.display();
+
+            System.out.println("Top element: " + numbers.peek());
+            System.out.println("Removed element: " + numbers.pop());
+            numbers.display();
+        }
+
+        // Stack class
+        public static class ArrayStack<T> {
+            private static final int DEFAULT = 4;
+            private int top;
+            private T[] stack;
+
+            // No-argument constructor
+            ArrayStack() {
+                this(DEFAULT);
+            }
+
+            // Constructor name isticmalay si aa ukala duwanano
+            ArrayStack(int name) {
+                top = 0;
+                stack = (T[]) (new Object[name]);
+            }
+
+            // Return current size
+            public int size() {
+                return top;
+            }
+
+            // Push method
+            public void push(T element) {
+                if (size() == stack.length)
+                    expand();
+                stack[top] = element;
+                top++;
+            }
+
+            // Pop method
+            public T pop() {
+                if (isEmpty())
+                    throw new EmptyStackException();
+                T result = stack[--top];
+                stack[top] = null;
+                return result;
+            }
+
+            // Peek method
+            public T peek() {
+                if (isEmpty())
+                    throw new EmptyStackException();
+                return stack[top - 1];
+            }
+
+            // Check if empty
+            public boolean isEmpty() {
+                return top == 0;
+            }
+
+            // Expand method
+            private void expand() {
+                stack = Arrays.copyOf(stack, stack.length * 2);
+            }
+
+            // Display method
+            public void display() {
+                if (isEmpty()) {
+                    throw new EmptyStackException();
+                }
+                System.out.println("Elements of the stack:");
+                for (int i = 0; i < top; i++) {
+                    System.out.println(stack[i] + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
